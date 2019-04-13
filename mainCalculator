@@ -1,0 +1,354 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class mainCalculator extends JFrame {
+	StringBuilder input = new StringBuilder("");
+	StringBuilder result = new StringBuilder("");
+	JTextField textField;
+	boolean dividing;
+	boolean additioning;
+	boolean Subtracting;
+	boolean multiplying;
+	boolean numButtonPush;
+	StringBuilder multiplyingBase;
+
+	public static void main(String[] args) {
+		mainCalculator mainWindow = new mainCalculator();
+		mainWindow.setSize(200, 170);
+		mainWindow.setVisible(true);
+		mainWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		mainWindow.setLocationRelativeTo(null);
+		mainWindow.setAlwaysOnTop(true);
+
+	}
+
+	public mainCalculator() {
+
+		setLayout(new GridBagLayout());
+
+		GridBagConstraints gbc = new GridBagConstraints();
+
+		Integer divideInput1;
+		Integer additionInput1;
+		Integer substrateInput1;
+		StringBuilder input;
+
+		JButton oneButton = new JButton("1");
+		eventOne eventOne = new eventOne();
+		oneButton.addActionListener(eventOne);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		add(oneButton, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		JButton twoButton = new JButton("2");
+		eventTwo eventTwo = new eventTwo();
+		twoButton.addActionListener(eventTwo);
+		add(twoButton, gbc);
+
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		JButton threeButton = new JButton("3");
+		eventThree eventThree = new eventThree();
+		threeButton.addActionListener(eventThree);
+		add(threeButton, gbc);
+
+		gbc.gridx = 3;
+		gbc.gridy = 1;
+		JButton cleaningButton = new JButton("Clean");
+		eventCleaning eventCleaning = new eventCleaning();
+		cleaningButton.addActionListener(eventCleaning);
+		add(cleaningButton, gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		JButton fourButton = new JButton("4");
+		eventFour eventFour = new eventFour();
+		fourButton.addActionListener(eventFour);
+		add(fourButton, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		JButton fiveButton = new JButton("5");
+		eventFive eventFive = new eventFive();
+		fiveButton.addActionListener(eventFive);
+		add(fiveButton, gbc);
+
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		JButton sixButton = new JButton("6");
+		eventSix eventSix = new eventSix();
+		sixButton.addActionListener(eventSix);
+		add(sixButton, gbc);
+
+		gbc.gridx = 2;
+		gbc.gridy = 3;
+		JButton sevenButton = new JButton("7");
+		eventSeven eventSeven = new eventSeven();
+		sevenButton.addActionListener(eventSeven);
+		add(sevenButton, gbc);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		JButton eightButton = new JButton("8");
+		eventEight eventEight = new eventEight();
+		eightButton.addActionListener(eventEight);
+		add(eightButton, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		JButton nineButton = new JButton("9");
+		eventNine eventNine = new eventNine();
+		nineButton.addActionListener(eventNine);
+		add(nineButton, gbc);
+
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		JButton zeroButton = new JButton("0");
+		eventZero eventZero = new eventZero();
+		zeroButton.addActionListener(eventZero);
+		add(zeroButton, gbc);
+
+		gbc.gridx = 3;
+		gbc.gridy = 3;
+		JButton additionButton = new JButton("\u002B");
+		eventAdditioning eventAdditioning = new eventAdditioning();
+		additionButton.addActionListener(eventAdditioning);
+		add(additionButton, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		JButton substractionButton = new JButton("\u2212");
+		eventSubtracting eventSubtracting = new eventSubtracting();
+		substractionButton.addActionListener(eventSubtracting);
+		add(substractionButton, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		JButton multiplicationButton = new JButton("\u00D7");
+		eventMultiplicating eventMultiplicating = new eventMultiplicating();
+		multiplicationButton.addActionListener(eventMultiplicating);
+		add(multiplicationButton, gbc);
+
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		JButton divisionButton = new JButton("\u00F7");
+		eventDividing eventDividing = new eventDividing();
+		divisionButton.addActionListener(eventDividing);
+		add(divisionButton, gbc);
+
+		gbc.gridx = 3;
+		gbc.gridy = 4;
+		JButton equalsButton = new JButton("\u003D");
+		eventEquals eventEquals = new eventEquals();
+		equalsButton.addActionListener(eventEquals);
+		add(equalsButton, gbc);
+
+		/// String dam = "" + input;
+		textField = new JTextField("0");
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 4;
+		add(textField, gbc);
+
+	}
+
+	public class eventOne implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			numButtonPush = true;
+			input.append("1");
+			textField.setText(input.toString());
+
+		}
+
+	}
+
+	public class eventTwo implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			numButtonPush = true;
+			input.append("2");
+			textField.setText(input.toString());
+
+		}
+
+	}
+
+	public class eventThree implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventThree) {
+			numButtonPush = true;
+			input.append("3");
+			textField.setText(input.toString());
+
+		}
+
+	}
+
+	public class eventFour implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventFour) {
+			numButtonPush = true;
+			input.append("4");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventFive implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventFive) {
+			numButtonPush = true;
+			input.append("5");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventSix implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventSix) {
+			numButtonPush = true;
+			input.append("6");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventSeven implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventSeven) {
+			numButtonPush = true;
+			input.append("7");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventEight implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventEight) {
+			numButtonPush = true;
+			input.append("8");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventNine implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventNine) {
+			numButtonPush = true;
+			input.append("9");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventZero implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventZero) {
+			numButtonPush = true;
+			input.append("0");
+			textField.setText(input.toString());
+
+		}
+	}
+
+	public class eventAdditioning implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventAdditioning) {
+			additioning = true;
+		}
+	}
+
+	public class eventDividing implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventDividing) {
+			dividing = true;
+		}
+	}
+
+	public class eventSubtracting implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventSubtration) {
+			Subtracting = true;
+		}
+	}
+
+	public class eventMultiplicating implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventMultiplicating) {
+			multiplying = true;
+
+			while (multiplying == true) {
+				int multiplierInt = Integer.valueOf(textField.toString().trim());
+				textField.setText("");
+
+				while (numButtonPush == true && multiplying == true) {
+					multiplying = false;
+					numButtonPush = false;
+					int multiplyingBase = Integer.valueOf(textField.toString().trim());
+					int multiplyingResultInt = multiplierInt * multiplyingBase;
+					String multiplyingResult = "" + multiplyingResultInt;
+					textField.setText(multiplyingResult);
+					while (numButtonPush == true && multiplying == true) {
+						actionPerformed(eventMultiplicating);
+					}
+					return;
+
+				}
+				return;
+			}
+
+		}
+	}
+
+	public class eventEquals implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventEquals) {
+
+		}
+	}
+
+	public class eventCleaning implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent eventCleaning) {
+			input = new StringBuilder();
+			textField.setText(input.toString());
+		}
+	}
+
+}
